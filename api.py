@@ -1,7 +1,6 @@
 from fastapi import FastAPI, Query, HTTPException
 from pydantic import BaseModel
 import pymongo
-from typing import List
 
 myclient = pymongo.MongoClient("mongodb://localhost:27017/")
 mydb = myclient["chat_db"]
@@ -28,6 +27,11 @@ def get_messages():
 
 @app.post('/add_message/')
 def post_message(data: Items):
+    existing_message = mycol.find_one({"id": data.id})
+
+    if existing_message:
+        raise HTTPException(status_code=400, detail="Message with this ID already exists")
+
     new_message = {
         "id": data.id,
         "name": data.name,
