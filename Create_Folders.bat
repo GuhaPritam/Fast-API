@@ -1,40 +1,41 @@
 @echo off
 
-:: FastAPI Project Folders Creation Script
-
-:: Main Project Folder
+:: Root folder creation
 mkdir fastapi_project
-
-:: Navigating to fastapi_project directory
 cd fastapi_project
 
-:: Creating app folder and subfolders
+:: Create root-level files
+type nul > .env
+echo # FastAPI Project > README.md
+type nul > requirements.txt
+echo @echo off > Create_Folders.bat
+
+:: Create app folder structure
 mkdir app
 cd app
-mkdir core
+type nul > main.py
+
+:: Create app subdirectories
 mkdir api
 mkdir models
 mkdir schemas
 mkdir services
-cd ..
+mkdir tests
+mkdir utils
 
-:: Creating subfolders inside api folder for versioning
-cd app\api
+:: Create API subdirectories
+cd api
 mkdir v1
 mkdir v2
+mkdir core
 cd ..
 
-:: Creating tests folder
-mkdir tests
+:: Back to root
+cd ..
 
-:: Other files
-echo .env file will be created manually.
-echo requirements.txt file will be created manually.
-echo README.md file will be created manually.
-echo Dockerfile will be created manually.
+:: Create migrations folder
+mkdir migrations
 
-:: Done message
+:: Done
 echo Folder structure created successfully!
-
-:: Pause the batch file to see the output
 pause
