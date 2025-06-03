@@ -5,6 +5,8 @@ __pycache__/
 
 # Virtual environments
 env/
+.env/
+*db/
 .venv/
 venv/
 ENV/
